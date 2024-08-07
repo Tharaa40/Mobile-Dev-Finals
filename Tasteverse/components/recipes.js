@@ -111,14 +111,19 @@ import React from 'react';
 import { View, Pressable, Image, StyleSheet } from 'react-native';
 import { Text, ActivityIndicator } from 'react-native-paper';
 import MasonryList from '@react-native-seoul/masonry-list';
+import CachedImage from './image';
 
 const RenderRecipe = ({ item, index }) => {
     const isEven = index % 2 === 0;
     return (
         <View style={styles.recipeContainer}>
             <Pressable style={{ width: '100%', paddingLeft: isEven ? 0 : 8, paddingRight: isEven ? 8 : 0, paddingVertical: '2%' }}>
-                <Image
+                {/* <Image
                     source={{ uri: item.strMealThumb }}
+                    style={{ width: '100%', height: index % 3 === 0 ? 140 : 250, borderRadius: 35 }}
+                /> */}
+                <CachedImage
+                    uri= { item.strMealThumb }
                     style={{ width: '100%', height: index % 3 === 0 ? 140 : 250, borderRadius: 35 }}
                 />
                 <Text variant="labelLarge">

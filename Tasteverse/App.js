@@ -19,8 +19,8 @@ const Tab = createBottomTabNavigator();
 function AuthNavigator() {
   return (
     <AuthStack.Navigator initialRouteName="Login">
-      <AuthStack.Screen name="Login" component={LoginScreen} options={{headerShown: false}} />
-      <AuthStack.Screen name="SignUp" component={SignUpScreen} options={{headerShown: false}} />
+      {/* <AuthStack.Screen name="Login" component={LoginScreen} options={{headerShown: false}} /> */}
+      {/* <AuthStack.Screen name="SignUp" component={SignUpScreen} options={{headerShown: false}} /> */}
       <AuthStack.Screen name='HomePage' component={HomeScreen} options={{headerShown: false}}/>
     </AuthStack.Navigator>
   );

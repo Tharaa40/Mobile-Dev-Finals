@@ -7,9 +7,9 @@ import { PaperProvider, Appbar, Avatar, Text,
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import MasonryList from '@react-native-seoul/masonry-list';
 import HomeCategories from "../components/categories";
 import HomeRecipes from "../components/recipes";
+
 
 
 export default function HomeScreen(){
@@ -43,7 +43,6 @@ export default function HomeScreen(){
 
     };
 
-
     const fetchCategoryMeals = async(category) => { //working
         try{
             setLoading(true);
@@ -58,6 +57,7 @@ export default function HomeScreen(){
         }
 
     }; 
+ 
 
     const fetchSearchResults = async (query) => { //working
         try{
@@ -193,7 +193,8 @@ export default function HomeScreen(){
                                     const itemLabel = item.strArea || item.strIngredient;
                                     return(
                                         <Checkbox.Item
-                                            key={`${itemLabel}-${index}`}
+                                            // key={`${itemLabel}-${index}`}
+                                            key={itemLabel}
                                             label={itemLabel}
                                             status={selectedFilters.includes(itemLabel) ? 'checked' : 'unchecked'}
                                             onPress={() => handleCheckboxChange(itemLabel)}
