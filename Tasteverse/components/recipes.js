@@ -112,12 +112,38 @@ import { View, Pressable, Image, StyleSheet } from 'react-native';
 import { Text, ActivityIndicator } from 'react-native-paper';
 import MasonryList from '@react-native-seoul/masonry-list';
 import CachedImage from './image';
+import { useNavigation } from '@react-navigation/native';
+import DetailsScreen from '../screens/RecipeDetails';
 
-const RenderRecipe = ({ item, index }) => {
+
+
+
+export default function HomeRecipes ( { loading, categoryMeals } ) {
+    const navigation = useNavigation();
+
+    return loading ? (
+        <ActivityIndicator animating={true} size="large" style={styles.loader} />
+    ) : (
+        <MasonryList
+            data={categoryMeals}
+            keyExtractor={(item) => item.idMeal}
+            renderItem={({ item, i }) => <RenderRecipe item={item} index={i}  navigation={navigation} />}
+            numColumns={2}
+            contentContainerStyle={styles.masonryContainer}
+            showsVerticalScrollIndicator={false}
+        />
+    );
+
+}
+
+const RenderRecipe = ({ item, index, navigation }) => {
     const isEven = index % 2 === 0;
     return (
         <View style={styles.recipeContainer}>
-            <Pressable style={{ width: '100%', paddingLeft: isEven ? 0 : 8, paddingRight: isEven ? 8 : 0, paddingVertical: '2%' }}>
+            <Pressable 
+                style={{ width: '100%', paddingLeft: isEven ? 0 : 8, paddingRight: isEven ? 8 : 0, paddingVertical: '2%' }}
+                onPress={() => navigation.navigate('RecipeDetail', {...item})}
+            >
                 {/* <Image
                     source={{ uri: item.strMealThumb }}
                     style={{ width: '100%', height: index % 3 === 0 ? 140 : 250, borderRadius: 35 }}
@@ -133,23 +159,6 @@ const RenderRecipe = ({ item, index }) => {
         </View>
     );
 };
-
-
-export default function HomeRecipes ( { loading, categoryMeals } ) {
-    return loading ? (
-        <ActivityIndicator animating={true} size="large" style={styles.loader} />
-    ) : (
-        <MasonryList
-            data={categoryMeals}
-            keyExtractor={(item) => item.idMeal}
-            renderItem={({ item, i }) => <RenderRecipe item={item} index={i} />}
-            numColumns={2}
-            contentContainerStyle={styles.masonryContainer}
-            showsVerticalScrollIndicator={false}
-        />
-    );
-
-}
 
 const styles = StyleSheet.create({
     recipeContainer: {

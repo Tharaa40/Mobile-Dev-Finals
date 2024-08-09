@@ -9,6 +9,7 @@ import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import HomeCategories from "../components/categories";
 import HomeRecipes from "../components/recipes";
+import { useNavigation } from "@react-navigation/native";
 
 
 
@@ -25,6 +26,8 @@ export default function HomeScreen(){
     const [ingredients, setIngredients] = useState([]);
     const [selectedFilter, setSelectedFilter] = useState('');
     const [selectedFilters, setSelectedFilters] = useState([]);
+
+    const navigation = useNavigation();
 
     useEffect(() => {
         fetchCategories();
@@ -133,6 +136,11 @@ export default function HomeScreen(){
                     </View>
                     <Text variant="headlineSmall"> Let's get cooking!</Text>
                 </View>
+
+                <Icon
+                    name="heart"
+                    onPress={() => navigation.navigate('Favourite')}
+                />
 
                 {/* Searchbar */}
                 <Searchbar
