@@ -57,6 +57,7 @@ export default function LoginScreen(){
                 <Button
                     mode='elevated'
                     style={styles.button}
+                    // onPress={() => navigation.navigate('Auth')}
                     onPress={() => navigation.navigate('HomePage')}
                 >
                     Login
